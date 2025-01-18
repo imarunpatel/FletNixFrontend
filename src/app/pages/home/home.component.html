@@ -1,20 +1,35 @@
 
-<div class="mt-20 flex justify-center dark:bg-gray-900 px-2 md:px-8">
-    <div class="overflow-x-auto shadow-md w-full max-w-5xl sm:rounded-lg">
+<div class="mt-12 mb-20 flex flex-col justify-center w-full max-w-5xl mx-auto dark:bg-gray-900 px-2 md:px-8">
+    <div class="flex items-center justify-end gap-2 pb-4">
+        <div class="">
+            <select id="type" (change)="onTypeChange($event)"  class="rounded-lg p-2 h-full text-gray-400 border border-gray-300">
+                <option value="">Type</option>
+                <option value="Movie">Movie</option>
+                <option value="TV Show">TV Show</option>
+            </select>
+        </div>
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+            </div>
+            <input type="text" [formControl]="searchControl" id="table-search" class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search for items">
+        </div>
+    </div>
+    <div class="overflow-x-auto shadow-md  sm:rounded-lg">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Product name
+                        Title
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Color
+                        Duration
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Category
+                        Release Year
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Price
+                        Rating
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Action
@@ -22,58 +37,57 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Apple MacBook Pro 17"
+                <tr *ngFor="let media of totalMedia" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{media.title}}
+                        <small class="text-gray-400">({{media.type}})</small>
                     </th>
-                    <td class="px-6 py-4">
-                        Silver
+                    <td class="px-6 py-2">
+                        {{media.duration}}
                     </td>
-                    <td class="px-6 py-4">
-                        Laptop
+                    <td class="px-6 py-2">
+                        {{media.release_year}}
                     </td>
-                    <td class="px-6 py-4">
-                        $2999
+                    <td class="px-6 py-2">
+                        {{media.rating}}
                     </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Microsoft Surface Pro
-                    </th>
-                    <td class="px-6 py-4">
-                        White
-                    </td>
-                    <td class="px-6 py-4">
-                        Laptop PC
-                    </td>
-                    <td class="px-6 py-4">
-                        $1999
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-                <tr class="bg-white dark:bg-gray-800">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Magic Mouse 2
-                    </th>
-                    <td class="px-6 py-4">
-                        Black
-                    </td>
-                    <td class="px-6 py-4">
-                        Accessories
-                    </td>
-                    <td class="px-6 py-4">
-                        $99
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    <td class="px-6 py-2">
+                        <a (click)="openModal(media)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                            View
+                        </a>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <app-pagination
+    [currentPage]="currentPage"
+    [totalItems]="totalItems"
+    [itemsPerPage]="itemsPerPage"
+    (pageChange)="onPageChange($event)"
+  ></app-pagination>
+
+    <!-- <div class="flex items-center justify-end gap-4 mt-3">
+        <span class="text-sm text-gray-700 dark:text-gray-400">
+            Showing <span class="font-semibold text-gray-900 dark:text-white">1</span> to <span class="font-semibold text-gray-900 dark:text-white">10</span> of <span class="font-semibold text-gray-900 dark:text-white">100</span> Entries
+        </span>
+        <div class="inline-flex">
+            <button class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                Prev
+            </button>
+            <button class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                Next
+            </button>
+        </div>
+    </div> -->
+
 </div>
+
+
+<app-modal
+  *ngIf="isModalOpen"
+  [data]="selectedMedia"
+  (close)="closeModal()"
+></app-modal>
+  

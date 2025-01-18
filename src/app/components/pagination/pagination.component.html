@@ -1,0 +1,19 @@
+<div class="flex items-center justify-end gap-4 mt-3">
+    <!-- Showing X to Y of Z Entries -->
+    <p class="text-sm text-gray-700">
+      Showing <span class="font-semibold">{{ startIndex }}</span> to
+      <span class="font-semibold">{{ endIndex }}</span> of
+      <span class="font-semibold">{{ totalItems }}</span> entries
+    </p>
+  
+    <!-- Pagination Buttons -->
+    <div class="inline-flex">
+      <button  (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1" class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-900 bg-gray-200 rounded-s hover:bg-gray-300 disabled:text-gray-400 disabled:hover:bg-gray-200 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          Prev
+      </button>
+      <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages" class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-900 bg-gray-200 border-0 border-s border-gray-300 disabled:text-gray-400 disabled:hover:bg-gray-200 rounded-e hover:bg-gray-300 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          Next
+      </button>
+    </div>
+  </div>
+  

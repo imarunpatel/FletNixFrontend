@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './pages/register/register.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { CommonModule } from '@angular/common';
 import { MainLayoutComponent } from './layouts/main/main-layout.component';
@@ -14,7 +13,8 @@ import { TokenInterceptor } from './interceptor/token.interceptor';
   declarations: [
     AppComponent,
     AuthLayoutComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
+    
   ],
   imports: [
     BrowserModule,
