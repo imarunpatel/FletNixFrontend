@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Dashboard Page', () => {
+test.describe('Home Page', () => {
   test.beforeEach(async ({ page, context }) => {
     await page.goto('/auth/login');
 
@@ -26,4 +26,17 @@ test.describe('Dashboard Page', () => {
     await expect(secondRow).toContainText('Blood & Water');
     await expect(secondRow).toContainText('2021');
   });
+
+  test('should filter table correctly', async ({page}) => {
+
+    await page.fill('#table-search', 'The Starling');
+
+    const tableRows = page.locator('table tbody tr');
+
+    await expect(tableRows).toHaveCount(1);
+
+    const firstRow = tableRows.nth(0);
+    await expect(firstRow).toContainText('The Starling');
+    await expect(firstRow).toContainText('2021');
+  })
 });

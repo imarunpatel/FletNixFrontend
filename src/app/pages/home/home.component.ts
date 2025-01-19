@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
       .pipe(debounceTime(700))
       .subscribe((query) => {
         this.searchQuery = query;
+        this.currentPage = 1;
         this.getMedia(this.currentPage, this.selectedType, query)
       })
   }
@@ -61,6 +62,7 @@ export class HomeComponent implements OnInit {
 
   onTypeChange(option: string) {
     this.selectedType =  option === 'All' ? '' : option;
+    this.currentPage = 1;
     this.getMedia(this.currentPage, this.selectedType, this.searchQuery)
   }
 
