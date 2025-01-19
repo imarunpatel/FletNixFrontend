@@ -6,7 +6,6 @@ import { LoginComponent } from 'src/app/pages/login/login.component';
 import { AuthLayoutRoutes } from './auth-layout.routing';
 import { RegisterComponent } from 'src/app/pages/register/register.component';
 
-
 @NgModule({
     imports: [
         RouterModule.forChild(AuthLayoutRoutes),

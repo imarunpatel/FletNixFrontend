@@ -1,5 +1,5 @@
 <div class="fixed  inset-0 px-2  bg-black bg-opacity-50 flex justify-center items-center" (click)="onClose()">
-    <div class="bg-white max-h-screen overflow-y-scroll rounded-lg shadow-lg p-6 w-full max-w-sm" (click)="$event.stopPropagation()">
+    <div class="bg-white max-h-[80vh] my-8 overflow-y-scroll rounded-lg shadow-lg p-6 w-full max-w-sm" (click)="$event.stopPropagation()">
       <h2 class="text-xl font-semibold mb-4">Details</h2>
       <ul>
         <li *ngFor="let data of modifiedData" class="flex justify-between gap-2 border-b-[1px] last:border-0 py-1"><span class="text-sm text-gray-500">

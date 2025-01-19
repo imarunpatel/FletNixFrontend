@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { delay, map, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, delay, map, Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IAPIResponse } from '../models/api-response';
 import { Router } from '@angular/router';
@@ -10,8 +10,8 @@ import { IUser } from '../models/user.model';
 export class AuthService {
 
     private baseURL = environment.baseURL;
-    private userObs: Subject<IUser> = new Subject();
-    public user: IUser | null = null;
+    private userSubject: BehaviorSubject<IUser | null> = new BehaviorSubject<IUser | null>(null);
+    public user$ = this.userSubject.asObservable();
 
     constructor(private http: HttpClient, private router: Router) { }
 
@@ -20,8 +20,9 @@ export class AuthService {
             .pipe(map((res) => {
                 if(res.success) {
                     localStorage.setItem('token', res.data.accessToken);
-                    this.userObs.next(res.data.user)
-                    this.user = res.data.user;
+                    // this.userObs.next(res.data.user)
+                    // this.user = res.data.user;
+                    this.userSubject.next(res.data.user);
                 }
                 return res;
             }));
@@ -35,7 +36,8 @@ export class AuthService {
         return this.http.get<IAPIResponse<IUser>>(this.baseURL + '/v1/self').pipe(delay(2000))
             .pipe(map((res) => {
                 if(res.success) {
-                    this.userObs.next(res.data)
+                    // this.userObs.next(res.data)
+                    this.userSubject.next(res.data)
                 }
                 return res;
             }))
@@ -49,9 +51,5 @@ export class AuthService {
     logout() {
         localStorage.clear();
         this.router.navigate(['auth/login']);
-    }
-
-    getUser(): Observable<IUser> {
-        return this.userObs.asObservable();
     }
 }

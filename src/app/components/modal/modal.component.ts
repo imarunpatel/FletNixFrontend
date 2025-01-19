@@ -12,7 +12,7 @@ export class ModalComponent implements OnChanges {
   modifiedData: string[][] = [];
 
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if(this.data) {
       for(let [key, value] of Object.entries(this.data)) {
         this.modifiedData.push([key, value])

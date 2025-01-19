@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime } from 'rxjs';
+import { debounceTime, Subscription } from 'rxjs';
 import { IMedia } from 'src/app/models/media.model';
 import { MediaService } from 'src/app/services/media.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   loading = false;
 
   // Pagination Variables
@@ -22,6 +21,7 @@ export class HomeComponent implements OnInit {
   selectedType: 'Movie' | 'TV Show' | string = '';
   searchQuery: string = '';
   searchControl = new FormControl();
+  private searchSubscription: Subscription = new Subscription();
 
   selectedMedia: IMedia | null = null;
   isModalOpen = false;
@@ -31,20 +31,24 @@ export class HomeComponent implements OnInit {
   constructor(private mediaService: MediaService) { }
 
   ngOnInit(): void {
-    
-    this.getMedia(this.currentPage, this.selectedType, this.searchQuery);
-    this.searchControl.valueChanges
+    this.getMedia();
+
+    this.searchSubscription = this.searchControl.valueChanges
       .pipe(debounceTime(700))
       .subscribe((query) => {
         this.searchQuery = query;
         this.currentPage = 1;
-        this.getMedia(this.currentPage, this.selectedType, query)
+        this.getMedia()
       })
   }
 
-  getMedia(page: number, type: string, query: string) {
+  ngOnDestroy(): void {
+      this.searchSubscription.unsubscribe();
+  }
+
+  getMedia() {
     this.loading = true;
-    this.mediaService.getMedia(page, type, query).subscribe({
+    this.mediaService.getMedia(this.currentPage, this.selectedType, this.searchQuery).subscribe({
       next: (res) => {
         if(res.success) {
           this.totalMedia = res.data.media;
@@ -54,7 +58,7 @@ export class HomeComponent implements OnInit {
         }
         this.loading = false;
       },
-      error: (err) => {
+      error: () => {
         this.loading = false;
       }
     })
@@ -63,13 +67,13 @@ export class HomeComponent implements OnInit {
   onTypeChange(option: string) {
     this.selectedType =  option === 'All' ? '' : option;
     this.currentPage = 1;
-    this.getMedia(this.currentPage, this.selectedType, this.searchQuery)
+    this.getMedia()
   }
 
   
   onPageChange(page: number): void {
     this.currentPage = page;
-    this.getMedia(page, this.selectedType, this.searchQuery)
+    this.getMedia()
   }
   
   openModal(value: IMedia) {
