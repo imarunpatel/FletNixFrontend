@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   }
 
   getSelf() {
-    this.loading = false;
+    this.loading = true;
     this.authService.getSelf().subscribe({
       next: () => {
         this.router.navigate(['']);

@@ -1,27 +1,31 @@
-# FletNix
+# **TV Shows & Movies Web Application**  
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.13.
+## **Overview**  
+This project is a full-stack web application that allows users to view, search, and filter TV shows and movies with various features like authentication, pagination, and age restrictions. The frontend is built with **Angular**, and the backend uses **Node.js (Express)** with **MongoDB** for the database.  
 
-## Development server
+To reduce hosting costs, the backend is deployed as a **Serverless Lambda Function**, avoiding the need for an EC2 instance.  
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+#### Live URL: [https://d330td8cw9xszv.cloudfront.net/](https://d330td8cw9xszv.cloudfront.net/)
 
-## Code scaffolding
+## **Tech Stack**  
+### **Frontend:**  *([Repo Link](https://github.com/imarunpatel/FletNixFrontend))*
+- Angular  
+- Tailwind CSS  
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### **Backend:**  *[Repo Link](https://github.com/imarunpatel/FletNixBackend)*
+- Node.js (Express)  
+- MongoDB  
+- Serverless (AWS Lambda)  
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## **Setup Instructions**  
+### **Steps to Run Locally:**  
+1. Clone the Repository
+   ```bash  
+   git clone https://github.com/imarunpatel/FletNixFrontend  
+   cd FletNixFrontend
+2. Install Dependencies
+    ```bash  
+   npm install 
+2. Run Project
+    ```bash  
+   npm start 
