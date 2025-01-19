@@ -8,13 +8,16 @@ import { CommonModule } from '@angular/common';
 import { MainLayoutComponent } from './layouts/main/main-layout.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptor } from './interceptor/token.interceptor';
+import { SplashComponent } from './components/splash/splash.component';
+import { MainHeaderComponent } from './components/main-header/main-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthLayoutComponent,
     MainLayoutComponent,
-    
+    SplashComponent,
+    MainHeaderComponent,
   ],
   imports: [
     BrowserModule,

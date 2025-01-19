@@ -10,6 +10,8 @@ import { MediaService } from 'src/app/services/media.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  loading = false;
+
   // Pagination Variables
   totalMedia: IMedia[] = [];
   currentPage: number = 1;
@@ -23,22 +25,24 @@ export class HomeComponent implements OnInit {
 
   selectedMedia: IMedia | null = null;
   isModalOpen = false;
+  mediaType = ['All', 'Movie', 'TV Show']
 
 
   constructor(private mediaService: MediaService) { }
 
   ngOnInit(): void {
+    
     this.getMedia(this.currentPage, this.selectedType, this.searchQuery);
     this.searchControl.valueChanges
       .pipe(debounceTime(700))
       .subscribe((query) => {
-        console.log('q', query)
         this.searchQuery = query;
         this.getMedia(this.currentPage, this.selectedType, query)
       })
   }
 
   getMedia(page: number, type: string, query: string) {
+    this.loading = true;
     this.mediaService.getMedia(page, type, query).subscribe({
       next: (res) => {
         if(res.success) {
@@ -47,17 +51,17 @@ export class HomeComponent implements OnInit {
           this.itemsPerPage = res.data.itemsPerPage;
           this.totalItems = res.data.totalItems
         }
+        this.loading = false;
       },
       error: (err) => {
-        console.log('err', err)
+        this.loading = false;
       }
     })
   }
 
-  onTypeChange(event: Event) {
-    console.log(event.target)
-    // this.selectedType = event.target!.value!;
-    // this.getMedia(this.currentPage, type, this.searchQuery)
+  onTypeChange(option: string) {
+    this.selectedType =  option === 'All' ? '' : option;
+    this.getMedia(this.currentPage, this.selectedType, this.searchQuery)
   }
 
   
@@ -75,4 +79,5 @@ export class HomeComponent implements OnInit {
     this.isModalOpen = false;
   }
 
+  
 }

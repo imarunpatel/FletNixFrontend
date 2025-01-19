@@ -1,0 +1,38 @@
+<div class="relative">
+    <div
+      class="border border-gray-300 rounded-lg text-sm h-full px-2 py-2 bg-gray-50 w-28 cursor-pointer flex justify-between items-center"
+      (click)="toggleDropdown()"
+    >
+      <span>{{ selectedOption || placeholder }}</span>
+      <svg
+        class="w-4 h-4 ml-2"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M7 10l5 5 5-5"
+        />
+      </svg>
+    </div>
+  
+    <div
+      *ngIf="isOpen"
+      class="absolute z-10 mt-1 w-full bg-white border rounded-lg shadow-lg"
+    >
+      <ul class="max-h-60 overflow-y-auto">
+        <li
+          *ngFor="let option of options"
+          (click)="selectOption(option)"
+          class="cursor-pointer p-2 hover:bg-gray-100 px-2 text-sm"
+        >
+          {{ option }}
+        </li>
+      </ul>
+    </div>
+  </div>
+  

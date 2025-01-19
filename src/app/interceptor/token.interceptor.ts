@@ -21,12 +21,9 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(clonedRequest).pipe(
       tap((event) => {
-        if(event instanceof HttpResponse) {
-          console.log('Response:', event);
-        }
+        if(event instanceof HttpResponse) {}
       }),
       catchError((error) => {
-        console.error('Error:', error);
         throw error;
       })
     );

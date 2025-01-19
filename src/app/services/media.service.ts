@@ -12,7 +12,13 @@ export class MediaService {
 
   constructor(private http: HttpClient) {}
 
-  getMedia(page: number, type: string, query: string): Observable<IAPIResponse<IMediaResponse>> {
-    return this.http.get<IAPIResponse<IMediaResponse>>(this.baseURL + `/v1/media/?page=${page}&type=${type}&query=${query}`);
+  getMedia(
+    page: number,
+    type: string,
+    query: string
+  ): Observable<IAPIResponse<IMediaResponse>> {
+    return this.http.get<IAPIResponse<IMediaResponse>>(
+      this.baseURL + `/v1/media/?page=${page}&type=${type}&query=${query}`
+    );
   }
 }

@@ -1,0 +1,7 @@
+<header class="bg-gray-100 py-2 px-2  flex justify-between">
+    <div class="netflix-text text-3xl flex items-center">FLETNIX</div>
+    <div class="flex gap-3 items-center">
+        <div class="hidden sm:block">👋 Hi{{user ? ", " + user.email : ''}}</div>
+        <button (click)="onLogout()" class="hover:bg-primary-900 hover:text-white px-4 py-3 rounded-full"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+    </div>
+</header>

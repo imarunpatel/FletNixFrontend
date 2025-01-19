@@ -2,3 +2,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.netflix-text {
+    font-family: 'Bebas Neue', sans-serif;;
+    color: #1e3a8a; 
+    text-transform: uppercase;
+    letter-spacing: 5px; 
+    text-shadow: 2px 2px 0 #dbeafe, 
+                 4px 4px 0 #dbeafe;
+}

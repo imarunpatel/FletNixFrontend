@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { PaginationComponent } from 'src/app/components/pagination/pagination.component';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CustomSelectComponent } from 'src/app/components/custom-select/custom-select.component';
+import { RemoveUnderscorePipe } from 'src/app/pipes/remove-underscore.pipe';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     declarations: [
     HomeComponent,
     PaginationComponent,
-    ModalComponent
+    ModalComponent,
+    CustomSelectComponent,
+    RemoveUnderscorePipe
   ],
     providers: [],
 })

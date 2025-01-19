@@ -1,43 +1,37 @@
-<section class="bg-gray-50 dark:bg-gray-900">
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-            <img class="w-36" src="assets/images/Netflix_Logo_RGB.png" alt="logo">
-        </a>
-        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 class="text-xl font-bold text-center leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                    Sign IN
-                </h1>
-                <form [formGroup]="loginForm" (ngSubmit)="!isLoading && onSubmit()" class=" relative space-y-4 md:space-y-6">
-                    <div>
-                        <label for="email" class="flex gap-2 relative mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Your email
-                            <svg  *ngIf="formSubmitted && !loginForm.get('email')?.invalid" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                                <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="20" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
-                                <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="20" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
-                            </svg>
-                            <small *ngIf="formSubmitted && loginForm.get('email')?.invalid" class=" text-red-700">Enter valid email</small>
-                        </label>
-                        <input formControlName="email" type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
-                    </div>
-                    <div>
-                        <label for="password" class="flex gap-2 relative mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                            Password
-                            <svg  *ngIf="formSubmitted && !loginForm.get('password')?.invalid" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
-                                <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="20" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
-                                <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="20" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
-                            </svg>
-                            <small *ngIf="formSubmitted && loginForm.get('password')?.invalid" class=" text-red-700">Enter valid password</small>
-                        </label>
-                        <input formControlName="password" type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-                    </div>
-                    <small class="text-red-600 absolute bottom-[85px]">{{errorMsg}}</small>
-                    <button type="submit" class="w-full mt-4 text-white bg-primary-900 hover:bg-primary-800 focus:ring-1 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">{{isLoading ? 'Loading...': 'Sign in'}}</button>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 text-end">
-                        Don’t have an account yet? <a href="#" class="ml-1 font-medium text-primary-900 hover:underline dark:text-primary-900" routerLink="../register">Sign up</a>
-                    </p>
-                </form>
+<div class="w-full mx-auto bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+    <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <h1 class="text-xl font-bold text-center leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+            Sign IN
+        </h1>
+        <p class="text-sm text-green-700 text-center">{{registerMsg}}</p>
+        <form [formGroup]="loginForm" (ngSubmit)="!isLoading && onSubmit()" class="relative flex flex-col gap-5">
+            <div>
+                <label for="email" class="flex gap-2 relative mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Your email
+                    <svg  *ngIf="formSubmitted && !loginForm.get('email')?.invalid" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                        <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="20" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+                        <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="20" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+                    </svg>
+                    <small *ngIf="formSubmitted && loginForm.get('email')?.invalid" class=" text-red-700">Enter valid email</small>
+                </label>
+                <input formControlName="email" type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@mail.com" required="">
             </div>
-        </div>
+            <div>
+                <label for="password" class="flex gap-2 relative mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Password
+                    <svg  *ngIf="formSubmitted && !loginForm.get('password')?.invalid" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                        <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="20" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+                        <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="20" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 "/>
+                    </svg>
+                    <small *ngIf="formSubmitted && loginForm.get('password')?.invalid" class=" text-red-700">Enter valid password</small>
+                </label>
+                <input formControlName="password" type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+            </div>
+            <small id="error-msg" class="text-red-600 absolute bottom-[85px]">{{errorMsg}}</small>
+            <button type="submit" class="w-full  mt-3 text-white bg-primary-900 hover:bg-primary-800 focus:ring-1 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">{{isLoading ? 'Loading...': 'Sign in'}}</button>
+            <p class="text-sm text-gray-500 dark:text-gray-400 text-end">
+                Don’t have an account yet? <a href="#" class="ml-1 font-medium text-primary-900 hover:underline dark:text-primary-900" routerLink="../register">Sign up</a>
+            </p>
+        </form>
     </div>
-  </section>
+</div>
