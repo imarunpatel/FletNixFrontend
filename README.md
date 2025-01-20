@@ -26,6 +26,10 @@ To reduce hosting costs, the backend is deployed as a **Serverless Lambda Functi
 2. Install Dependencies
     ```bash  
    npm install 
-2. Run Project
+3. Run Project
     ```bash  
    npm start 
+
+4. Test the project with PlayWright
+    ```bash
+    npx playwright test
