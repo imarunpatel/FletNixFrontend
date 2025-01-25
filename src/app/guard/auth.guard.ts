@@ -8,17 +8,20 @@ import { AuthService } from '../services/auth.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private authService: AuthService, private route: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(this.authService.isLoggedIn()) {
-        return true;
-      } else {
-        this.route.navigate(['auth/login'])
-        return false;
-      }
+    state: RouterStateSnapshot
+  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    if (this.authService.isLoggedIn()) {
+      return true;
+    }
+    
+    // Store the attempted URL for redirecting
+    const redirectUrl = state.url;
+    return this.router.createUrlTree(['auth/login'], {
+      queryParams: { returnUrl: redirectUrl }
+    });
   }
-  
 }

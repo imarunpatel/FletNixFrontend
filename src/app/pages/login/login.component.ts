@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   isLoading: boolean = false;
   errorMsg: string = '';
   registerMsg: string | null = null;
+  returnUrl: string = '/';
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private route: ActivatedRoute) { 
     this.loginForm = this.fb.group({
@@ -24,32 +25,34 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      this.route.params.subscribe({
-        next: (params) => {
-          this.registerMsg = params['msg'];
-        }
-      })
+    // Get return URL from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+    this.route.params.subscribe({
+      next: (params) => {
+        this.registerMsg = params['msg'];
+      }
+    });
   }
 
   onSubmit() {
-    
     this.formSubmitted = true;
     if (!this.loginForm.valid) return;
 
     this.isLoading = true;
+    this.errorMsg = '';
 
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
       next: response => {
         if(response.success) {
-          this.router.navigate(['/']);
+          this.router.navigate([this.returnUrl]);
         }
         this.isLoading = false;
       },
       error: error => {
-        this.errorMsg = error.error.error
+        this.errorMsg = error.error.error;
         this.isLoading = false;
       }
-    })
+    });
   }
-
 }
